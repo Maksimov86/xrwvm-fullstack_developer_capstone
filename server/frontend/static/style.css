@@ -117,10 +117,19 @@ img{
 
 .img_icon {
   align-self: center;
-    width:40px;
-    background-color:#0C9;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;  
+  width:40px;
+  background-color:#0C9;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;  
+}
+
+.vertical-line {
+  border-left: 2px solid black; /* Линия с шириной 2px и черным цветом */
+  height: 300px; /* Высота линии */
+  position: absolute;
+  left: 50%; /* Позиционируем линию на середине страницы */
+  top: 50%;  /* Отцентрируем по вертикали */
+  transform: translate(-50%, -50%); /* Выровняем по центру */
 }
