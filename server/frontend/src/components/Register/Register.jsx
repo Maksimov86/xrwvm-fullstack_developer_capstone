@@ -18,6 +18,28 @@ const Register = () => {
     }
 
     const register = async (e) => {
-        
+        e.preventDefault();
+
+        let register_url = window.location.origin+"/djangoapp/register";
+
+        const res = await fetch(register_url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "userName": userName,
+                "password": password,
+                "firstName": firstName,
+                "lastName": lastName,
+                "email": email
+            }),
+        });
+
+        const json = await res.json();
+        if (json.status) {
+            sessionStorage.setItem('username', json.userName);
+            window.location.href = window.location.origin;
+        }
     }
 }
