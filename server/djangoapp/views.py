@@ -15,7 +15,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .restapis.py import get_request, analyze_review_sentiments, post_review, 
+from .restapis import get_request, analyze_review_sentiments, post_review
 
 
 # Get an instance of a logger
@@ -51,7 +51,7 @@ def logout_request(request):
 @csrf_exempt
 def registration(request):
     context = {}
-    
+
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -67,6 +67,7 @@ def registration(request):
     except:
         # If not, simply log this is a new user
         logger.debug("{} is new user".format(username))
+
     # If it is a new user
     if not username_exist:
         # Create user in auth_user table
