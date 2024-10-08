@@ -1,3 +1,9 @@
+"use strict";
+/* eslint-env es6 */
+
+// Добавляем директиву esversion: 6
+/* jshint esversion: 6 */
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
