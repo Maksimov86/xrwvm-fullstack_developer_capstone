@@ -38,7 +38,7 @@ const dealerships = new Schema({
     full_name: {
         type: String,
         required: true
-  }
+    }
 });
 
 module.exports = mongoose.model('dealerships', dealerships);
