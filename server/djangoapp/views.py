@@ -72,7 +72,7 @@ def registration(request):
         return JsonResponse({"userName": username, "status": "Authenticated"})
     else:
         return JsonResponse({"userName": username,
-            "error": "Already Registered"})
+        "error": "Already Registered"})
 
 
 def get_cars(request):
@@ -138,6 +138,6 @@ def add_review(request):
         except Exception as e:
             logger.error(f"Error posting review: {str(e)}")
             return JsonResponse({"status": 401,
-                "message": "Error in posting review"})
+            "message": "Error in posting review"})
 
     return JsonResponse({"status": 403, "message": "Unauthorized"})
