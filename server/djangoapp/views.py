@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
-from django.contrib import messages
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import logging
@@ -71,8 +71,8 @@ def registration(request):
         login(request, user)
         return JsonResponse({"userName": username, "status": "Authenticated"})
     else:
-        return JsonResponse({"userName": username, \
-        "error": "Already Registered"})
+        return JsonResponse({"userName": username,
+            "error": "Already Registered"})
 
 
 def get_cars(request):
@@ -137,7 +137,7 @@ def add_review(request):
             return JsonResponse({"status": 200})
         except Exception as e:
             logger.error(f"Error posting review: {str(e)}")
-            return JsonResponse({"status": 401, \
-            "message": "Error in posting review"})
+            return JsonResponse({"status": 401, 
+                "message": "Error in posting review"})
 
     return JsonResponse({"status": 403, "message": "Unauthorized"})
