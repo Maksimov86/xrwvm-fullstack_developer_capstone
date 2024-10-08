@@ -1,4 +1,5 @@
 /* eslint-env es6 */
+/* eslint esversion: 6 */
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
