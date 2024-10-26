@@ -42,3 +42,21 @@ app.get('/cars/:id', async (req, res) => {
     }
 });
 
+app.get('/carsbymake/:id/:make', async (req, res) => {
+    try {
+        const documents = await Cars.find({dealer_id: req.params.id, make: req.params.make});
+        res.json(documents);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching reviews by car make and model' });
+    }
+});
+
+app.get('/carsbymodel/:id/:model', async (req, res) => {
+    try {
+        const documents = await Cars.find({ dealer_id: req.params.id, model: req.params.model });
+        res.json(documents);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching dealers by ID' });
+    }
+});
+
