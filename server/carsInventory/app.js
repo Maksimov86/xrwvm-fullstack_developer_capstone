@@ -35,7 +35,7 @@ app.get('/', async (req, res) => {
 
 app.get('/cars/:id', async (req, res) => {
     try {
-        const documents = await Cars.find({dealer_id: req.params.id});
+        const documents = await Cars.find({ dealer_id: req.params.id });
         res.json(documents);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching reviews' });
@@ -44,7 +44,7 @@ app.get('/cars/:id', async (req, res) => {
 
 app.get('/carsbymake/:id/:make', async (req, res) => {
     try {
-        const documents = await Cars.find({dealer_id: req.params.id, make: req.params.make});
+        const documents = await Cars.find({ dealer_id: req.params.id, make: req.params.make });
         res.json(documents);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching reviews by car make and model' });
@@ -60,3 +60,54 @@ app.get('/carsbymodel/:id/:model', async (req, res) => {
     }
 });
 
+app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
+    try {
+        let mileage = parseInt(req.params.mileage)
+        let condition = {}
+        if (mileage === 50000) {
+            condition = { $lte : mileage }
+        } else if (mileage === 100000) {
+            condition = { $lte : mileage, $gt : 50000 }
+        } else if (mileage === 150000) {
+            condition = { $lte : mileage, $gt : 100000 }
+        } else if (mileage === 200000) {
+            condition = { $lte : mileage, $gt : 150000 }
+        } else {
+            condition = { $gt : 200000 }
+        }
+        const documents = await Cars.find({ dealer_id: req.params.id, mileage: condition });
+        res.json(documents);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching dealers by ID' });
+    }
+});
+
+app.get('/carsbyprice/:id/:price', async (req, res) => {
+    try {
+        let price = parseInt(req.params.price)
+        let condition = {}
+        if (price === 20000) {
+            condition = { $lte : price }
+        } else if (price === 40000) {
+            condition = { $lte : price, $bt : 20000 }
+        } else if (price === 60000) {
+            condition = { $lte : price, $bt : 40000 }
+        } else if (price === 80000) {
+            condition = { $lte : price, $bt : 60000 }
+        } else {
+            condition = { $bt : 80000 }
+        }
+    }
+});
+
+app.get('/carsbyyear/:id/:year', async (req, res) => {
+    try {
+        const documents = await Cars.find({ dealer_id: req.params.id, year: { $gte: req.params.year }});
+        res.json(documents);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching dealers by ID' });
+    }
+});
+
+app.listen(port) => {}
+    console.log('Server is running on http://')
