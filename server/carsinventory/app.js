@@ -21,7 +21,6 @@ mongoose.connect('mongodb://mongo_db:27017/', { dbName: 'dealershipsDB' })
 const Cars = require('./inventory');
 
 try {
-
   Cars.deleteMany({}).then(() => {
     Cars.insertMany(carsData.cars);
   });
@@ -34,11 +33,9 @@ app.get('/', async (req, res) => {
   res.send('Welcome to the Mongoose API');
 });
 
-
-
 app.get('/cars/:id', async (req, res) => {
   try {
-    const documents = await Cars.find({dealer_id: req.params.id});
+    const documents = await Cars.find({ dealer_id: req.params.id });
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching reviews' });
@@ -47,7 +44,7 @@ app.get('/cars/:id', async (req, res) => {
 
 app.get('/carsbymake/:id/:make', async (req, res) => {
   try {
-    const documents = await Cars.find({dealer_id: req.params.id, make: req.params.make});
+    const documents = await Cars.find({ dealer_id: req.params.id, make: req.params.make });
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching reviews by car make and model' });
@@ -85,7 +82,6 @@ app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
   }
 });
 
-
 app.get('/carsbyprice/:id/:price', async (req, res) => {
     try {
         let price = parseInt(req.params.price)
@@ -108,8 +104,6 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
         res.status(500).json({ error: 'Error fetching dealers by ID' });
       }
 });
-
-
 
 app.get('/carsbyyear/:id/:year', async (req, res) => {
   try {
